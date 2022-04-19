@@ -1,0 +1,29 @@
+<div class="grid-table">
+  <div class="grid-column">
+    <div class="grid-tile column-header">Numbers</div>
+    <div class="grid-tile" *ngFor="let number of numbersArray">
+      {{ number.number }}
+    </div>
+
+    <input class="grid-input" type="text" />
+    <button>Explore</button>
+  </div>
+  <div class="grid-column">
+    <div class="grid-tile column-header">Date</div>
+    <div class="grid-tile" *ngFor="let date of dateArray">
+      {{ date.number }}
+    </div>
+
+    <input class="grid-input" type="text" />
+    <button>Explore</button>
+  </div>
+  <div class="grid-column">
+    <div class="grid-tile column-header">Math</div>
+    <div class="grid-tile" *ngFor="let math of mathArray">
+      {{ math.number }}
+    </div>
+
+    <input class="grid-input" type="text" />
+    <button>Explore</button>
+  </div>
+</div>

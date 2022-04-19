@@ -1,0 +1,36 @@
+.grid-table {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2em;
+}
+
+.grid-column {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.grid-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15vw;
+  height: 10vh;
+  min-width: 75px;
+  min-height: 50px;
+  background-color: white;
+  font-size: 1rem;
+  color: black;
+  cursor: pointer;
+
+  &:first-child {
+    background-color: yellow;
+    height: 5vh;
+    min-height: 40px;
+    border-radius: 0.5rem 0.5rem 0 0;
+    cursor: default;
+  }
+
+  &:last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+}
