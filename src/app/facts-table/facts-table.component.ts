@@ -39,7 +39,6 @@ export class FactsTableComponent implements OnInit {
       mathValue: new FormControl('', Validators.required),
     });
     this.mathArray = this.randomizerService.generateArray('math');
-    console.log(this.mathArray);
   }
 
   getFact(type: string, number: number | string) {

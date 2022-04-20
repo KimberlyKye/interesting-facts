@@ -33,10 +33,8 @@ export class RandomizerService {
   }
 
   generateMessage(type: string, value: number) {
-    let newFact!: Fact;
     this.returnResponse(type, value).subscribe((fact) => {
-      newFact = fact;
-      alert(newFact.text);
+      alert(fact.text);
     });
   }
 
