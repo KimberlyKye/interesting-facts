@@ -1,29 +1,62 @@
 <div class="grid-table">
   <div class="grid-column">
     <div class="grid-tile column-header">Numbers</div>
-    <div class="grid-tile" *ngFor="let number of numbersArray">
-      {{ number.number }}
+    <div
+      class="grid-tile"
+      *ngFor="let number of numbersArray"
+      (click)="getFact('', number)"
+    >
+      {{ number }}
     </div>
 
-    <input class="grid-input" type="text" />
-    <button>Explore</button>
+    <form (ngSubmit)="getFact('', numberValue)" [formGroup]="numbersForm">
+      <input
+        class="grid-input"
+        type="text"
+        formControlName="numberValue"
+        [(ngModel)]="numberValue"
+      />
+      <button type="submit" [disabled]="numbersForm.invalid">Get</button>
+    </form>
   </div>
   <div class="grid-column">
     <div class="grid-tile column-header">Date</div>
-    <div class="grid-tile" *ngFor="let date of dateArray">
-      {{ date.number }}
+    <div
+      class="grid-tile"
+      *ngFor="let date of dateArray"
+      (click)="getFact('date', date)"
+    >
+      {{ date }}
     </div>
 
-    <input class="grid-input" type="text" />
-    <button>Explore</button>
+    <form (ngSubmit)="getFact('date', dateValue)" [formGroup]="dateForm">
+      <input
+        class="grid-input"
+        type="text"
+        formControlName="dateValue"
+        [(ngModel)]="dateValue"
+      />
+      <button type="submit" [disabled]="dateForm.invalid">Get</button>
+    </form>
   </div>
   <div class="grid-column">
     <div class="grid-tile column-header">Math</div>
-    <div class="grid-tile" *ngFor="let math of mathArray">
-      {{ math.number }}
+    <div
+      class="grid-tile"
+      *ngFor="let math of mathArray"
+      (click)="getFact('math', math)"
+    >
+      {{ math }}
     </div>
 
-    <input class="grid-input" type="text" />
-    <button>Explore</button>
+    <form (ngSubmit)="getFact('math', mathValue)" [formGroup]="mathForm">
+      <input
+        class="grid-input"
+        type="text"
+        formControlName="mathValue"
+        [(ngModel)]="mathValue"
+      />
+      <button type="submit" [disabled]="mathForm.invalid">Get</button>
+    </form>
   </div>
 </div>

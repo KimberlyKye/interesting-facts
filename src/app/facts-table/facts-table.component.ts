@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Fact, RandomizerService } from '../shared/randomizer.service';
-import { map, take } from 'rxjs/operators';
+import { RandomizerService } from '../shared/randomizer.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-facts-table',
@@ -9,51 +9,42 @@ import { map, take } from 'rxjs/operators';
 })
 export class FactsTableComponent implements OnInit {
   constructor(public randomizerService: RandomizerService) {}
-  mathArray: Fact[] = [];
-  dateArray: Fact[] = [];
-  numbersArray: Fact[] = [];
 
-  fact: Fact = { text: '', number: null, found: false, type: '' };
+  headers: string[] = ['numbers', 'date', 'math'];
+
+  numbersForm!: FormGroup;
+  dateForm!: FormGroup;
+  mathForm!: FormGroup;
+
+  numberValue: string = '';
+  dateValue: string = '';
+  mathValue: string = '';
+
+  numbersArray: number[] = [];
+  dateArray: number[] = [];
+  mathArray: number[] = [];
+
+  num?: number;
 
   ngOnInit() {
-    this.loadPage();
-  }
-
-  private loadPage() {
-    this.numbersArray = this.generateNumbersArray();
-    this.dateArray = this.generateDateArray();
-    this.mathArray = this.generateMathArray();
+    this.numbersForm = new FormGroup({
+      numberValue: new FormControl('', Validators.required),
+    });
+    this.numbersArray = this.randomizerService.generateArray('number');
+    this.dateForm = new FormGroup({
+      dateValue: new FormControl('', Validators.required),
+    });
+    this.dateArray = this.randomizerService.generateArray('date');
+    this.mathForm = new FormGroup({
+      mathValue: new FormControl('', Validators.required),
+    });
+    this.mathArray = this.randomizerService.generateArray('math');
     console.log(this.mathArray);
   }
 
-  generateNumbersArray(): Fact[] {
-    for (var i = 0; i < 5; i++) {
-      this.randomizerService
-        .returnResponse('trivia')
-        .pipe(take(1))
-        .subscribe((fact) => this.numbersArray.push(fact));
-    }
-    return this.numbersArray;
+  getFact(type: string, number: number | string) {
+    this.num = 0;
+    this.num = +number;
+    this.randomizerService.generateMessage(type, this.num);
   }
-
-  generateDateArray(): Fact[] {
-    for (var i = 0; i < 5; i++) {
-      this.randomizerService
-        .returnResponse('date')
-        .pipe(take(1))
-        .subscribe((fact) => this.dateArray.push(fact));
-    }
-    return this.dateArray;
-  }
-
-  generateMathArray(): Fact[] {
-    for (var i = 0; i < 5; i++) {
-      this.randomizerService
-        .returnResponse('math')
-        .pipe(take(1))
-        .subscribe((fact) => this.mathArray.push(fact));
-    }
-    return this.mathArray;
-  }
-  headers: string[] = ['numbers', 'date', 'math'];
 }
