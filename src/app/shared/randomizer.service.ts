@@ -1,52 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, catchError, throwError } from 'rxjs';
-import { Observable } from 'rxjs';
 import { angularMath } from 'angular-ts-math';
-
-export interface Fact {
-  text: string;
-  number: number | null;
-  found: boolean;
-  type: string;
-  date?: string;
-  year?: string;
-}
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RandomizerService {
-  static url = 'http://numbersapi.com';
-  response: any;
+  constructor(public datepipe: DatePipe) {}
 
-  constructor(private http: HttpClient) {}
-
-  returnResponse(type: string, value: number): Observable<Fact> {
-    return this.http
-      .get<Fact>(`${RandomizerService.url}/${value}/${type}?json`)
-      .pipe(
-        map((response) => {
-          return response;
-        })
-      );
+  randomDate(start: Date, end: Date): Date {
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
   }
 
-  generateMessage(type: string, value: number) {
-    this.returnResponse(type, value).subscribe((fact) => {
-      alert(fact.text);
-    });
-  }
+  generateArray(type: string): string[] {
+    let array: string[] = [];
 
-  generateArray(type: string): number[] {
-    let array: number[] = [];
     if (type == 'date') {
       for (var i = 0; i < 5; i++) {
-        array.push(angularMath.getIntegerRandomRange(0, 2022));
+        var d = this.datepipe.transform(
+          this.randomDate(new Date(2021, 0, 1), new Date()),
+          'MM/dd'
+        )!;
+        array.push(d);
       }
     } else {
       for (var i = 0; i < 5; i++) {
-        array.push(angularMath.getIntegerRandomRange(-10000, 10000));
+        array.push(angularMath.getIntegerRandomRange(-10000, 10000).toString());
       }
     }
     return array;

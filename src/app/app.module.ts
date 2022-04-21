@@ -7,6 +7,7 @@ import { FactsTableComponent } from './facts-table/facts-table.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, FactsTableComponent],
@@ -17,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
