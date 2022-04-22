@@ -21,7 +21,9 @@ export class MessageService {
           return response;
         }),
         catchError((err) => {
-          alert('Failed to find a fact');
+          alert(
+            'Failed to find a fact, check the format of data: number or "MM/dd" if number is date'
+          );
           return throwError(err);
         })
       );

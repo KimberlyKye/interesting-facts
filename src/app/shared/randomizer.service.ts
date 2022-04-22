@@ -27,7 +27,9 @@ export class RandomizerService {
       }
     } else {
       for (var i = 0; i < 5; i++) {
-        array.push(angularMath.getIntegerRandomRange(-10000, 10000).toString());
+        array.push(
+          angularMath.getIntegerRandomRange(-1000000, 1000000).toString()
+        );
       }
     }
     return array;
